@@ -78,6 +78,13 @@ if (! isset($ipForwardNb['0']['inetCidrRouteNumber']) && $device['os'] != 'route
     d_echo($tableRoute);
     echo 'RFC1213 ';
     foreach ($tableRoute as $ipRoute) {
+        // quick fix fortigate VDOM issue
+        foreach ($ipRoute as $k => $v) {
+            if (is_array($v) && count($v) >= 1) {
+                $ipRoute[$k] = $v[1];
+            }
+        }
+
         if (empty($ipRoute['ipRouteDest']) || $ipRoute['ipRouteDest'] == '') {
             continue;
         }
