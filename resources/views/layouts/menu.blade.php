@@ -16,7 +16,7 @@
             </a>
         </div>
 
-        <div class="collapse navbar-collapse" id="navHeaderCollapse">
+        <div class="collapse navbar-collapse" id="navHeaderCollapse" style="max-height: calc(100vh - 50px)">
             <ul class="nav navbar-nav">
 {{-- Overview --}}
                 <li class="dropdown">
@@ -251,9 +251,14 @@
                         @endif
                         @admin
                         <li role="presentation" class="divider"></li>
-                        <li><a href="{{ route('maps.custom.index') }}"><i class="fa fa-map-marked fa-fw fa-lg"
-                                                                          aria-hidden="true"></i> {{ __('Custom Map Editor') }}
-                            </a></li>
+                        <li><a href="{{ route('maps.custom.index') }}">
+                            <i class="fa fa-pen fa-fw fa-lg" aria-hidden="true"></i> {{ __('Custom Map Editor') }}
+                        </a></li>
+                        @if(Route::is('maps.custom.show'))
+                        <li><a href="{{ route('maps.custom.edit', ['map' => Route::current()->parameter('map')]) }}">
+                            <i class="fa fa-pen-to-square fa-fw fa-lg" aria-hidden="true"></i> {{ __('Edit Current Map') }}
+                        </a></li>
+                        @endif
                         @endadmin
 
                     </ul>
